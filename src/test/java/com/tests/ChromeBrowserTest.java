@@ -47,7 +47,7 @@ public class ChromeBrowserTest {
     }
 
         @Test
-        public void mobileChromeTest() throws InterruptedException {
+        public void mobileChromeTest() throws Exception {
         driver.get("http://qa1.vytrack.com");
         driver.findElement(By.id("prependedInput")).sendKeys("storemanager85");
         driver.findElement(By.id("prependedInput2")).sendKeys("UserUser123", Keys.ENTER);
@@ -55,6 +55,7 @@ public class ChromeBrowserTest {
 
         }
         public void tearDown(){
+
         driver.quit();
         }
 }
