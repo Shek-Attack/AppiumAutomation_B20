@@ -2,10 +2,13 @@ package com.tests;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -74,9 +77,32 @@ public class CalculatorTests {
 
         Assert.assertEquals(expected,actual);
 
-    }
-    @After
-    public void tearDown(){
+        }
+        @Test
+        public void calculatorTestWithTouchActions(){
+        AndroidElement btn9 = driver.findElementById("com.android.calculator2:id/digit_9");
+        AndroidElement btn0 = driver.findElementById("com.android.calculator2:id/digit_0");
+        AndroidElement divide = driver.findElementByAccessibilityId("divide");
+        AndroidElement btn5 = driver.findElementById("com.android.calculator2:id/digit_5");
+        AndroidElement resultElement = driver.findElementById("com.android.calculator2:id/result");
+        AndroidElement equalBtn = driver.findElement(MobileBy.AccessibilityId("equals"));
+
+        //we can click on elements, or we can use touch actions
+            TouchAction touchAction = new TouchAction(driver);
+            touchAction.tap(new TapOptions().withElement(new ElementOption().withElement(btn9))).perform();
+            touchAction.tap(new TapOptions().withElement(new ElementOption().withElement(btn0))).perform();
+            touchAction.tap(new TapOptions().withElement(new ElementOption().withElement(divide))).perform();
+            touchAction.tap(new TapOptions().withElement(new ElementOption().withElement(btn5))).perform();
+            touchAction.tap(new TapOptions().withElement(new ElementOption().withElement(equalBtn))).perform();
+
+            int expected = 18;
+            int actual = Integer.parseInt(resultElement.getText());
+            Assert.assertEquals(expected,actual);
+
+        }
+
+        @After
+         public void tearDown(){
         driver.closeApp();
 
     }
