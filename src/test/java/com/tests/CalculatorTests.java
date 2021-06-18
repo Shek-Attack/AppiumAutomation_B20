@@ -6,7 +6,9 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
@@ -21,8 +23,10 @@ import java.net.URL;
 
 public class CalculatorTests {
 
-    @Test
-    public void calculatorTest() throws Exception {
+    AppiumDriver<AndroidElement> driver;
+
+    @Before
+    public void setup() throws MalformedURLException {
         // to specify test settings and required info about device and app under the test
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         //desiredCapabilities.setCapability("plaformName","Android");
@@ -39,11 +43,15 @@ public class CalculatorTests {
         //localhost means that appium server is running on your computer
         //if appium server launched on some other computer
         //specifically IP/DNS address instead of localhost
-        URL url = new URL("http://localhost:4723/wd/hub"); //internal network
         //localhost can be replaced by IP address of EC2
         //localhost = 0.0.0.0 but later one might not work sometimes
+        URL url = new URL("http://localhost:4723/wd/hub"); //internal network
+         driver = new AndroidDriver<>(url,desiredCapabilities);
+    }
 
-        AppiumDriver<AndroidElement> driver = new AndroidDriver<>(url,desiredCapabilities);
+    @Test
+    public void calculatorTest() throws Exception {
+
         AndroidElement btn2 = driver.findElement(MobileBy.id("com.android.calculator2:id/digit_2"));
         AndroidElement plusBtn = driver.findElement(MobileBy.AccessibilityId("plus"));
        // AndroidElement btn2 = driver.findElement(MobileBy.id("com.android.calculator2:id/digit_2"));// don't need
@@ -66,8 +74,10 @@ public class CalculatorTests {
 
         Assert.assertEquals(expected,actual);
 
+    }
+    @After
+    public void tearDown(){
         driver.closeApp();
-
 
     }
 }
