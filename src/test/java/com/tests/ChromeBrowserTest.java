@@ -17,7 +17,7 @@ import java.net.URL;
 
 public class ChromeBrowserTest {
 
-         WebDriver driver;
+        WebDriver driver;
   //// or  WebDriver driver;
 
     @Before
@@ -29,10 +29,9 @@ public class ChromeBrowserTest {
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "7.0");
         desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME,"Pixel_2");
-        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME,"UiAutomation2");
+        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME,"UiAutomator2");
         desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME,"Chrome");
-//        desiredCapabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE,"com.android.calculator2");
-//        desiredCapabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,"com.android.calculator2.Caldulator");
+      //  System.setProperty("webdriver.chrome","C:\\ChromeDRIVER\\chrome 2.23 (51)");
 
         //for new apps - just use "app"
         //for pre-installed - "appPackage" and "appActivity"
